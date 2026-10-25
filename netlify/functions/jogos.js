@@ -107,6 +107,8 @@ export default async (request) => {
         const resposta = await fetch(url);
 
         if (!resposta.ok) {
+            console.error("Erro HTTP da Steam:", resposta.status);
+        
             return Response.json(
                 { error: "Erro ao consultar a biblioteca da Steam." },
                 { status: 502 }
