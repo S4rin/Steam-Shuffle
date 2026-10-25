@@ -10,7 +10,7 @@ export default async (request) => {
         );
     }
 
-    const apiKey = process.env.get("STEAM_API_KEY");
+    const apiKey = Netlify.env.get("STEAM_API_KEY");
 
     if (!apiKey) {
         return Response.json(
@@ -32,8 +32,10 @@ export default async (request) => {
         const resposta = await fetch(url);
 
         if (!resposta.ok) {
+            console.error("Erro HTTP da Steam:", resposta.status);
+        
             return Response.json(
-                { error: "Erro ao consultar a Steam." },
+                { error: `A Steam retornou HTTP ${resposta.status}.` },
                 { status: 502 }
             );
         }
