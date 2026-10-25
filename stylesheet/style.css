@@ -113,3 +113,68 @@ body{
 .info-box .botao {
     flex-shrink: 0;
 }
+
+
+/* Animação de entrada do resultado */
+.resultado.animando {
+    animation: aparecer 0.4s ease-out;
+}
+
+@keyframes aparecer {
+    0% {
+        opacity: 0;
+        transform: translateY(15px) scale(0.96);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Efeito na capa durante o sorteio */
+.resultado.animando img {
+    animation: brilho 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes brilho {
+    from {
+        filter: brightness(0.7);
+        transform: scale(0.98);
+    }
+
+    to {
+        filter: brightness(1.2);
+        transform: scale(1.02);
+    }
+}
+
+/* Destaque do jogo vencedor */
+.resultado.vencedor {
+    animation: vencedor 0.6s ease-out;
+}
+
+@keyframes vencedor {
+    0% {
+        transform: scale(0.94);
+        opacity: 0.6;
+    }
+
+    60% {
+        transform: scale(1.04);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Respeita quem prefere animações reduzidas */
+@media (prefers-reduced-motion: reduce) {
+    .resultado.animando,
+    .resultado.animando img,
+    .resultado.vencedor {
+        animation: none;
+    }
+}
