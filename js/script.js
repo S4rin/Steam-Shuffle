@@ -1,6 +1,5 @@
 
 const botao = document.querySelector("#botao-sortear");
-const botaoNovamente = document.querySelector("#sortearNovamente");
 const campoSteamId = document.querySelector("#steamId");
 
 const resultado = document.querySelector("#resultado");
@@ -12,13 +11,12 @@ const mensagem = document.querySelector("#mensagem");
 let jogos = [];
 
 botao.addEventListener("click", carregarJogos);
-botaoNovamente.addEventListener("click", sortearJogo);
 
 async function carregarJogos() {
-    const steamId = campoSteamId.value.trim();
+    const entrada = campoSteamId.value.trim();
 
-    if (!/^\d{17}$/.test(steamId)) {
-        mensagem.textContent = "Digite um Steam ID64 válido.";
+    if (!entrada) {
+        mensagem.textContent = "Digite seu ID64 ou link do perfil Steam.";
         return;
     }
 
@@ -28,7 +26,7 @@ async function carregarJogos() {
 
     try {
         const resposta = await fetch(
-            `/.netlify/functions/jogos?steamId=${encodeURIComponent(steamId)}`
+            `/.netlify/functions/jogos?steamId=${encodeURIComponent(entrada)}`
         );
 
         const dados = await resposta.json();
@@ -43,7 +41,7 @@ async function carregarJogos() {
 
         if (jogos.length === 0) {
             mensagem.textContent =
-                "Nenhum jogo encontrado. Verifique a privacidade da biblioteca.";
+                "Nenhum jogo encontrado. Verifique se sua biblioteca é pública.";
             return;
         }
 
