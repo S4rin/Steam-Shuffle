@@ -10,7 +10,7 @@ export default async (request) => {
         );
     }
 
-    const apiKey = Netlify.env.get("STEAM_API_KEY");
+    const apiKey = process.env.get("STEAM_API_KEY");
 
     if (!apiKey) {
         return Response.json(
